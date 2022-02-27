@@ -9,17 +9,16 @@ public class FlockManager : MonoBehaviour
 
     [SerializeField]
     private int numObjects = 20;
-
-    [SerializeField]
-    private GameObject[] allObjects;
+    
+    public GameObject[] allObjects;
     
     [SerializeField]
     private Vector3 boxLimits = new Vector3(5, 5, 5);
 
     [Header("Object Settings")]
-    [Range(0.0f, 5.0f)]
+    [Range(0.0f, 25.0f)]
     public float minSpeed;
-    [Range(0.0f, 5.0f)] 
+    [Range(0.0f, 25.0f)] 
     public float maxSpeed;
     [Range(0.0f, 10.0f)]
     public float neighbourDistance;

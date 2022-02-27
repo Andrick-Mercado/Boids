@@ -239,10 +239,10 @@ MonoBehaviour:
   numObjects: 20
   allObjects: []
   boxLimits: {x: 50, y: 50, z: 50}
-  minSpeed: 1
-  maxSpeed: 2
-  neighbourDistance: 0
-  rotationSpeed: 0
+  minSpeed: 20
+  maxSpeed: 25
+  neighbourDistance: 7.58
+  rotationSpeed: 1
 --- !u!4 &1772100035
 Transform:
   m_ObjectHideFlags: 0
