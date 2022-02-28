@@ -56,7 +56,7 @@ public class Flock : MonoBehaviour
 
         if (groupSize > 0)
         {
-            vcentre = vcentre / groupSize;
+            vcentre = vcentre / groupSize + (myManager.goalPos - this.transform.position);
             _speed = gSpeed / groupSize;
 
             Vector3 direction = (vcentre + vavoid) - transform.position;

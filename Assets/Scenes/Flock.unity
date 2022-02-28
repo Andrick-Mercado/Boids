@@ -236,13 +236,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPrefab: {fileID: 8073821527154733992, guid: bc97f615d7326584da9bdfcc6e4d8023, type: 3}
+  minSpeed: 4.7
+  maxSpeed: 8.6
+  neighbourDistance: 7.04
+  rotationSpeed: 3.9
   numObjects: 20
   allObjects: []
-  boxLimits: {x: 50, y: 50, z: 50}
-  minSpeed: 20
-  maxSpeed: 25
-  neighbourDistance: 7.58
-  rotationSpeed: 1
+  boxLimitsStart: {x: 5, y: 5, z: 5}
+  boxLimit: {x: 100, y: 100, z: 100}
+  goalPos: {x: 34, y: 34, z: 34}
 --- !u!4 &1772100035
 Transform:
   m_ObjectHideFlags: 0
@@ -251,7 +253,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1772100033}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 55.59, y: 48.61674, z: 52.544353}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
