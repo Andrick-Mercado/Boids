@@ -15,9 +15,9 @@ public class FlockManager : MonoBehaviour
     public float minSpeed;
     [Range(0.0f, 25.0f)] 
     public float maxSpeed;
-    [Range(0.0f, 10.0f)]
+    [Range(0.0f, 25.0f)]
     public float neighbourDistance;
-    [Range(0.0f, 5.0f)] 
+    [Range(0.0f, 25.0f)] 
     public float rotationSpeed;
     
     [Header("Limits")]
@@ -32,9 +32,13 @@ public class FlockManager : MonoBehaviour
     [SerializeField]
     private Vector3 boxLimit = new Vector3(100, 100, 100);
     
-    //[HideInInspector]
-    public Vector3 goalPos;
-    
+    //public Vector3 goalPos;
+
+    //private bool reachedGoal = false;
+
+    public Transform goalTransform;
+
+
     private void Start()
     {
         allObjects = new GameObject[numObjects];
@@ -47,14 +51,30 @@ public class FlockManager : MonoBehaviour
             allObjects[i] = (GameObject) Instantiate(objectPrefab, pos, Quaternion.identity);
             allObjects[i].GetComponent<Flock>().myManager = this;
         }
-
-        goalPos = this.transform.position;
-    }
-
-    private void Update()
-    {
-        goalPos = this.transform.position + new Vector3(Random.Range(-boxLimit.x, boxLimit.x),
+        
+        goalTransform.position = this.transform.position + new Vector3(Random.Range(-boxLimit.x, boxLimit.x),
             Random.Range(-boxLimit.y, boxLimit.y),
             Random.Range(-boxLimit.z, boxLimit.z));
+        //goalPos = goalTransform.position; //this.transform.position;
+    }
+
+    // private void Update()
+    // {
+    //     if (reachedGoal)
+    //     {
+    //         goalPos = this.transform.position + new Vector3(Random.Range(-boxLimit.x, boxLimit.x),
+    //             Random.Range(-boxLimit.y, boxLimit.y),
+    //             Random.Range(-boxLimit.z, boxLimit.z));
+    //         reachedGoal = false;
+    //     }
+    //     
+    // }
+    
+    public void CollisionDetected(GoalManager goalManager)
+    {
+        goalTransform.position = this.transform.position + new Vector3(Random.Range(-boxLimit.x, boxLimit.x),
+            Random.Range(-boxLimit.y, boxLimit.y),
+            Random.Range(-boxLimit.z, boxLimit.z));
+        //reachedGoal = true;
     }
 }
