@@ -17,6 +17,7 @@ public class Flock : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        _speed = Random.Range(myManager.minSpeed, myManager.maxSpeed);
         ApplyRules();
         transform.Translate(0, 0, Time.deltaTime * _speed);
     }
