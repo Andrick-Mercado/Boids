@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -9,6 +7,10 @@ public class FlockManager : MonoBehaviour
     [Header("Dependencies")]
     [SerializeField] 
     private GameObject objectPrefab;
+    [SerializeField] 
+    private GameObject[] checkpoints;
+    
+    
 
     [Header("Object Settings")]
     [Range(0.0f, 25.0f)]
@@ -32,12 +34,25 @@ public class FlockManager : MonoBehaviour
     [SerializeField]
     private Vector3 boxLimit = new Vector3(100, 100, 100);
     
-    //public Vector3 goalPos;
-
-    //private bool reachedGoal = false;
-
     public Transform goalTransform;
+    
+    [Header("Algorithm")]
+    [SerializeField]
+    private MyEnum SelectAlgorithm = new MyEnum();
 
+    private bool isRandomAlgorithm;
+    private int curIndex;
+    public enum MyEnum
+    {
+        LazyFlight,
+        CircleTree
+    };
+
+    private void Awake()
+    {
+        isRandomAlgorithm = SelectAlgorithm.ToString().Equals("LazyFlight");
+        curIndex = 1;
+    }
 
     private void Start()
     {
@@ -52,29 +67,28 @@ public class FlockManager : MonoBehaviour
             allObjects[i].GetComponent<Flock>().myManager = this;
         }
         
-        goalTransform.position = this.transform.position + new Vector3(Random.Range(-boxLimit.x, boxLimit.x),
-            Random.Range(-boxLimit.y, boxLimit.y),
-            Random.Range(-boxLimit.z, boxLimit.z));
-        //goalPos = goalTransform.position; //this.transform.position;
+        // goalTransform.position = this.transform.position + new Vector3(Random.Range(-boxLimit.x, boxLimit.x),
+        //     Random.Range(-boxLimit.y, boxLimit.y),
+        //     Random.Range(-boxLimit.z, boxLimit.z));
+        
+        goalTransform.position =
+            isRandomAlgorithm ? this.transform.position + new Vector3(Random.Range(-boxLimit.x, boxLimit.x),
+                Random.Range(-boxLimit.y, boxLimit.y),
+                Random.Range(-boxLimit.z, boxLimit.z)) : checkpoints[0].transform.position;
     }
-
-    // private void Update()
-    // {
-    //     if (reachedGoal)
-    //     {
-    //         goalPos = this.transform.position + new Vector3(Random.Range(-boxLimit.x, boxLimit.x),
-    //             Random.Range(-boxLimit.y, boxLimit.y),
-    //             Random.Range(-boxLimit.z, boxLimit.z));
-    //         reachedGoal = false;
-    //     }
-    //     
-    // }
     
     public void CollisionDetected(GoalManager goalManager)
     {
-        goalTransform.position = this.transform.position + new Vector3(Random.Range(-boxLimit.x, boxLimit.x),
-            Random.Range(-boxLimit.y, boxLimit.y),
-            Random.Range(-boxLimit.z, boxLimit.z));
-        //reachedGoal = true;
+        if (isRandomAlgorithm)
+        {
+            goalTransform.position = this.transform.position + new Vector3(Random.Range(-boxLimit.x, boxLimit.x),
+                Random.Range(-boxLimit.y, boxLimit.y),
+                Random.Range(-boxLimit.z, boxLimit.z));
+        }
+        else if(checkpoints.Length > curIndex)
+        {
+            goalTransform.position = checkpoints[curIndex].transform.position;
+            curIndex++;
+        }
     }
 }
