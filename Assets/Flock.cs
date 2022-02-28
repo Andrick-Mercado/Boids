@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Flock : MonoBehaviour
@@ -8,13 +6,11 @@ public class Flock : MonoBehaviour
 
     private float _speed;
     
-    // Start is called before the first frame update
     void Start()
     {
         _speed = Random.Range(myManager.minSpeed, myManager.maxSpeed);
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         _speed = Random.Range(myManager.minSpeed, myManager.maxSpeed);
@@ -22,6 +18,9 @@ public class Flock : MonoBehaviour
         transform.Translate(0, 0, Time.deltaTime * _speed);
     }
 
+    /// <summary>
+    /// Uses alingment, cohesion, and separation to provide flocking behavior
+    /// </summary>
     void ApplyRules()
     {
         GameObject[] gos;
@@ -57,7 +56,7 @@ public class Flock : MonoBehaviour
 
         if (groupSize > 0)
         {
-            vcentre = vcentre / groupSize + (myManager.goalTransform.position * 2 - this.transform.position); //.goalPos
+            vcentre = vcentre / groupSize + (myManager.goalTransform.position * 2 - this.transform.position);
             _speed = gSpeed / groupSize;
 
             Vector3 direction = (vcentre + vavoid) - transform.position;
