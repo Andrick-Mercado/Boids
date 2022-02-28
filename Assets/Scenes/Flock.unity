@@ -216,8 +216,8 @@ GameObject:
   m_Component:
   - component: {fileID: 1427981855}
   - component: {fileID: 1427981856}
-  - component: {fileID: 1427981857}
   - component: {fileID: 1427981858}
+  - component: {fileID: 1427981857}
   m_Layer: 0
   m_Name: CollisionTrigger
   m_TagString: Untagged
@@ -310,11 +310,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   objectPrefab: {fileID: 8073821527154733992, guid: bc97f615d7326584da9bdfcc6e4d8023, type: 3}
-  minSpeed: 0.4
-  maxSpeed: 0.7
-  neighbourDistance: 25
+  minSpeed: 5.6
+  maxSpeed: 6
+  neighbourDistance: 8.5
   rotationSpeed: 25
-  numObjects: 10
+  numObjects: 20
   allObjects: []
   boxLimitsStart: {x: 5, y: 5, z: 5}
   boxLimit: {x: 100, y: 100, z: 100}
